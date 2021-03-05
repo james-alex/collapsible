@@ -60,10 +60,10 @@ class Collapsible extends StatefulWidget {
   /// regardless of whether the child is still visible in the collapsed state
   /// unless [maintainAnimation] is set to `true`.
   const Collapsible({
-    Key key,
-    @required this.child,
-    @required this.collapsed,
-    @required this.axis,
+    Key? key,
+    required this.child,
+    required this.collapsed,
+    required this.axis,
     this.alignment = Alignment.center,
     this.minWidthFactor = 0.0,
     this.minHeightFactor = 0.0,
@@ -75,22 +75,9 @@ class Collapsible extends StatefulWidget {
     this.onComplete,
     bool maintainState = false,
     this.maintainAnimation = false,
-  })  : assert(child != null),
-        assert(collapsed != null),
-        assert(axis != null),
-        assert(alignment != null),
-        assert(minWidthFactor != null &&
-            minWidthFactor >= 0.0 &&
-            minWidthFactor <= 1.0),
-        assert(minHeightFactor != null &&
-            minHeightFactor >= 0.0 &&
-            minHeightFactor <= 1.0),
-        assert(fade != null),
-        assert(minOpacity != null && minOpacity >= 0.0 && minOpacity <= 1.0),
-        assert(duration != null),
-        assert(curve != null),
-        assert(maintainState != null),
-        assert(maintainAnimation != null),
+  })  : assert(minWidthFactor >= 0.0 && minWidthFactor <= 1.0),
+        assert(minHeightFactor >= 0.0 && minHeightFactor <= 1.0),
+        assert(minOpacity >= 0.0 && minOpacity <= 1.0),
         maintainState = maintainState ||
             maintainAnimation ||
             (axis != CollapsibleAxis.vertical && minWidthFactor > 0.0) ||
@@ -141,7 +128,7 @@ class Collapsible extends StatefulWidget {
   final Clip clipBehavior;
 
   /// A callback called every time the animation completes.
-  final VoidCallback onComplete;
+  final VoidCallback? onComplete;
 
   /// If `false`, the [child] will be replaced with a `SizedBox.shrink()`
   /// when the [Collapsible] is in its collapsed state, if `true`, the
@@ -233,7 +220,7 @@ class _CollapsibleState extends State<Collapsible> {
           duration: widget.duration,
           curve: widget.curve,
           onEnd: () {
-            if (widget.onComplete != null) widget.onComplete();
+            if (widget.onComplete != null) widget.onComplete!();
             _toggleChild();
           },
           child: widget.fade
