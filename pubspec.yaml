@@ -1,6 +1,6 @@
 name: collapsible
 description: A widget that implicitly collapses and expands around its child by clipping it.
-version: 0.1.0
+version: 1.0.0
 homepage: https://github.com/james-alex/collapsible
 
 environment:
